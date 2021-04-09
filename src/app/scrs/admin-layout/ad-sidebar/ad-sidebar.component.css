@@ -1,0 +1,50 @@
+.box-content {
+    /* padding: 15px;
+    min-height: 97vh; */
+}
+
+h5 {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    height: 49px;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+.ul-primary,
+.ul-secondary {
+    padding: 0;
+}
+.ul-primary>li{
+    margin-bottom: 15px;
+    cursor: default;
+    
+}
+
+.ul-primary>li:hover {
+    background-color: #24293a;
+}
+.ul-secondary li a {
+    color: white;
+    padding-left: 80px;
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.ul-secondary li a:hover {
+    background-color: #3b455f;
+}
+
+span {
+    padding-left: 32px;
+}
+.is-active {
+    background-color: #3b455f;
+}
+

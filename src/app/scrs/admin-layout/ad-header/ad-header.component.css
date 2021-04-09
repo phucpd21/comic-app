@@ -1,0 +1,28 @@
+.header {
+    background-color: coral;
+    display: flex;
+    border-radius: 15px;
+}
+
+.logo {
+    width: 2000px;
+    line-height: 48px;
+    padding-left: 15px;
+    color: white;
+    text-shadow: 1.5px 1px rgb(179, 179, 179);
+    font-weight: 500;
+}
+
+.search {
+    width: 100%;
+    padding-right: 15px;
+}
+.search input {
+    margin: 5px 0;
+    width: 100%;
+    border-radius: 10px;
+}
+.search input:focus {
+    border-color: rgb(119, 118, 118);
+    box-shadow: none;
+}
