@@ -7,3 +7,9 @@
 .form-new-author {
     /* margin-right: 0; */
 }
+
+.alert {
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 0;
+}

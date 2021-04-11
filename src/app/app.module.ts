@@ -55,7 +55,7 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    // FormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule
   ],

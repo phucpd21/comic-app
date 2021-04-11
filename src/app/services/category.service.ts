@@ -34,4 +34,8 @@ export class CategoryService {
     delete(id:Number):Observable<Category> {
         return this.http.delete<Category>(this.API_URL);
     }
+
+    findByAllWord(word:string): Observable<Category> {
+        return this.http.get<Category>(`${this.API_URL}/${word}/_fulltext`);
+    } 
 }

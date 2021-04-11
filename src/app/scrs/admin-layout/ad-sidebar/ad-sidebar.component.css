@@ -39,6 +39,8 @@ ul {
 }
 .ul-secondary li a:hover {
     background-color: #3b455f;
+    color: rgb(194, 72, 24);
+    text-shadow: 0.5px 0.5px rgb(168, 165, 165);
 }
 .ul-secondary li a:active {
     background-color: #343c53;

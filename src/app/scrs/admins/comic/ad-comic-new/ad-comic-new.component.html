@@ -7,7 +7,23 @@
             <div class="row mb-3">
                 <label class="col-form-label col-2 text-end">Tên truyện:</label>
                 <div class="col-10">
-                    <input type="text" class="form-control" formControlName="name">
+                    <input type="text" class="form-control" formControlName="name" (keyup)="checkName()">
+
+                    <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)" class="alert alert-warning">
+                        <div *ngIf="f.name.errors?.required">
+                            Tên bắt buộc
+                        </div>
+                        <div *ngIf="f.name.errors?.minlength">
+                            Tên không dưới 3 ký tự
+                        </div>
+                        <div *ngIf="f.name.errors?.asyncValidation">
+                            Tên đã được dùng
+                        </div>
+                    </div>
+                    <div *ngIf="!validName" class="alert alert-warning">
+                        Tên đã tồn tại
+                    </div>
+
                 </div>
             </div>
     
@@ -16,9 +32,15 @@
                 <div class="col-10">
                     <select class="form-select" formControlName="cate_id">
                         <option [ngValue]="null" disabled>Chọn thể loại</option>
-                        <option [ngValue]="2">Thể loại 1</option>
-                        <option [ngValue]="2">Thể loại 2</option>
+                        <option value="{{ category.id }}" *ngFor="let category of categories">{{ category.name }}</option>
                     </select>
+
+                    <div *ngIf="f.cate_id.invalid && (f.cate_id.dirty || f.cate_id.touched)" class="alert alert-warning">
+                        <div *ngIf="f.cate_id.errors?.required">
+                            Danh mục bắt buộc
+                        </div>
+                    </div>
+
                 </div>
             </div>
     
@@ -26,29 +48,30 @@
                 <label class="col-form-label col-2 text-end">Ảnh:</label>
                 <div class="col-10">
                     <input type="file" class="form-control" formControlName="image" (change)="uploadImage($event)">
+                    
+                    <div *ngIf="f.image.invalid && (f.image.dirty || f.image.touched)" class="alert alert-warning">
+                        <div *ngIf="f.image.errors?.required">
+                            Ảnh bắt buộc
+                        </div>
+                    </div>
+
                 </div>
             </div>
     
-            <!-- <div class="row mb-3">
+            <div class="row mb-3">
                 <label class="col-form-label col-2 text-end">Tác giả:</label>
                 <div class="col-10">
                     <select class="form-select" formControlName="au_id">
-                        <option [ngValue]="null">Chọn tác giả</option>
+                        <option [ngValue]="null" disabled>Chọn tác giả</option>
+                        <option *ngFor="let author of authors" value="{{ author.id }}">{{ author.name }}</option>
                     </select>
-                </div>
-            </div> -->
-            <!-- Test tác giả -->
-            <div class="row mb-3">
-                <label class="col-form-label col-2 text-end">Tác giả:</label>
-                <div class="col-10 box-input-author">
-                    <input type="text" class="form-control" formControlName="au_id"  (keyup)="FindAuthor($event)">
-                    <div class="box-list-author">
-                        <div *ngIf="checkAuthor">
-                            <ul>
-                                <li *ngFor="let author of authors" name="author_name" value="{{ author.id }}" (click)=chooseAuthor($event)>{{ author.name }}</li>
-                            </ul>
+
+                    <div *ngIf="f.au_id.invalid && (f.au_id.dirty || f.au_id.touched)" class="alert alert-warning">
+                        <div *ngIf="f.au_id.errors?.required">
+                            Tác giả bắt buộc
                         </div>
                     </div>
+
                 </div>
             </div>
     
@@ -56,9 +79,33 @@
                 <label class="col-form-label col-2 text-end">Tập số:</label>
                 <div class="col-10">
                     <input type="number" class="form-control" formControlName="chapters">
+                    
+                    <div *ngIf="f.chapters.invalid && (f.chapters.dirty || f.chapters.touched)" class="alert alert-warning">
+                        <div *ngIf="f.chapters.errors?.required">
+                            Số thứ tự tập truyện bắt buộc
+                        </div>
+                    </div>
+
                 </div>
             </div>
-    
+
+            <div class="row mb-3">
+                <label class="col-form-label col-2 text-end">Trạng thái</label>
+                <div class="col-10">
+                    <select class="form-select" formControlName="status">
+                        <option [ngValue]='null' disabled >Chọn trạng thái</option>
+                        <option value=2>Đang tiến hành</option>
+                        <option value=1>Hoành thành</option>
+                    </select>
+                    <div *ngIf="f.status.invalid && (f.status.dirty || f.status.touched)" class="alert alert-warning">
+                        <div *ngIf="f.status.errors?.required">
+                            Trạng thái truyện bắt buộc
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
             <div class="row mb-3">
                 <label class="col-form-label col-2 text-end">Lượt xem:</label>
                 <div class="col-10">
@@ -76,7 +123,7 @@
             <div class="row mb-3">
                 <label class="form-label col-2"></label>
                 <div class="col-10">
-                    <button  type="submit" class="btn btn-success w-100">Thêm ngay</button>
+                    <button  type="submit" class="btn btn-success w-100" [disabled]="FormComic.invalid || !validName" >Thêm ngay</button>
                 </div>
             </div>
         </form>
@@ -86,7 +133,7 @@
         <div class="row">
             <label class="col-9">Ảnh xem trước: </label>
             <div class="col-3">
-                <a href="javascript:;" (click)="removeImage()" >Gỡ</a>
+                <!-- <a href="javascript:;" (click)="removeImage()" >Gỡ</a> -->
             </div>
         </div>
         <div class="" *ngIf="image">
@@ -95,7 +142,6 @@
         <div class="" *ngIf="!image">
             <img src="https://ibiene.com/wp-content/uploads/2016/12/demo-image.jpg" alt="">
         </div>
-        <!-- <img src="http://st.imageinstant.net/data/comics/146/nguyen-ton.jpg" alt=""> -->
     </div>
 
 </div>

@@ -20,4 +20,15 @@ export class AdComicListComponent implements OnInit {
         });
     }
 
+    onRemove(id:Number) {
+        if(confirm('Xóa ngay')) {
+            this.comicService.delete(id).subscribe(data => {
+                console.log(data);
+                this.comicService.getsAll().subscribe(data => {
+                    this.comics = data;
+                })
+            });
+        }
+    }
+
 }

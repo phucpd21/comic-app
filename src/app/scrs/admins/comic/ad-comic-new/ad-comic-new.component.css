@@ -51,35 +51,8 @@
     transform: scale(0.98);
 }
 
-.box-list-author {
-    display: none;
-}
-
-.box-input-author:hover .box-list-author {
-    background-color: rgb(243, 243, 243);
-    position: absolute;
-    width: 488.5px;
-    z-index: 100;
-    display: block;
-}
-
-.box-input-author ul{
-    margin-bottom: 5px;
-    /* border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px; */
-}
-
-.box-input-author ul li {
-    cursor: default;
-    padding: 3px 0;
-    /* border-bottom: 1px solid white; */
-}
-
-.box-input-author ul li:hover {
-    /* border-bottom: 1px solid white; */
-    background-color: rgb(223, 223, 223);
-}
-
-.box-input-author ul li:active {
-    background-color: rgb(214, 214, 214);
+.alert {
+    padding: 0;
+    margin-top: 0px;
+    margin-bottom: 0;
 }

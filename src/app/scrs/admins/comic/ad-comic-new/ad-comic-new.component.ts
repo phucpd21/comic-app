@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthorService } from 'src/app/services/author.service';
 import { ComicService } from 'src/app/services/comic.service';
 import { Author } from 'src/app/models/author';
-
+import { Category } from 'src/app/models/category';
+import { CategoryService } from 'src/app/services/category.service';
+import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
-import { empty, Observable } from 'rxjs';
-import { Comic } from 'src/app/models/comic';
+import { finalize} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-ad-comic-new',
@@ -17,28 +18,54 @@ import { Comic } from 'src/app/models/comic';
 export class AdComicNewComponent implements OnInit {
     FormComic: FormGroup;
     authors: Author[] = [];
-    checkAuthor: Boolean = false;
+    categories: Category[] = [];
     image!: string;
+    validName:Boolean = true;
 
     downloadURL!: Observable<string>;
 
     constructor(
         private authorService: AuthorService,
         private comicService: ComicService,
-        private storage: AngularFireStorage
-    ) {
-        this.FormComic = this.CreateFormGroup();
+        private categoryService: CategoryService,
+        private storage: AngularFireStorage,
+        private router: Router,
+    ) { this.FormComic = this.CreateFormGroup() }
+
+    checkName() {
+        let wordValue = this.FormComic.value.name.trim() ? this.FormComic.value.name : '_';
+        this.comicService.findFullWord(wordValue).subscribe(data => {
+            if(data) {
+                this.validName = false;
+            } else {
+                this.validName = true;
+            }
+        });
     }
 
     CreateFormGroup() {
         return new FormGroup({
-            name: new FormControl(''),
-            cate_id: new FormControl(),
-            au_id: new FormControl(),
-            image: new FormControl(''),
+            name: new FormControl('', [
+                Validators.required,
+                Validators.minLength(3),
+            ]),
+            cate_id: new FormControl('', [
+                Validators.required
+            ]),
+            au_id: new FormControl('', [
+                Validators.required,
+            ]),
             descs: new FormControl(''),
             views: new FormControl(''),
-            chapters: new FormControl(''),
+            status: new FormControl('', [
+                Validators.required
+            ]),
+            image: new FormControl('', [
+                Validators.required
+            ]),
+            chapters: new FormControl('', [
+                Validators.required
+            ]),
         });
     }
     get f() {
@@ -46,44 +73,21 @@ export class AdComicNewComponent implements OnInit {
     }
 
     ngOnInit(): void {
-    }
-
-    FindAuthor(event: any) {
-        let keyword: string = event.target.value;
-        if (keyword) {
-            this.authorService.findByWord(keyword).subscribe(data => {
-                this.authors = data ? data : [];
-                let array2: [] = [];
-                let array3 = this.authors.concat(array2);
-                if (this.authors != array3) {
-                    this.checkAuthor = true;
-                } else {
-                    this.checkAuthor = false;
-                }
-            });
-        }
-    }
-
-    chooseAuthor(event: any) {
-        // console.log(event.target.value);
-        this.f.au_id.setValue(event.target.innerText);
-        this.authors = [];
+        this.authorService.getAll().subscribe(data => {
+            this.authors = data;
+        });
+        this.categoryService.getAll().subscribe(data => {
+            this.categories = data;
+        });
     }
 
     onSubmit() {
-       
-        let fakeObj = {
-            name: 'fake_name3',
-            cate_id: 1,
-            au_id: 1,
-            image: "C:\\fakepath\\1595815102f8371e943e34b08de23bfc9fb94ea294_thumbnail_900x.jpg",
-            descs: 'mieuta1',
-            views: 1,
-            chapters:1
-        };
-        this.comicService.addNew(fakeObj).subscribe(data => {
-            console.log('Đã thêm: ', data);
-        });
+        if (this.FormComic.valid && this.validName) {
+            this.FormComic.value.image = this.image;
+            this.comicService.addNew(this.FormComic.value).subscribe(data => {
+                this.router.navigate(['/admin/comic-list']);
+            });
+        }
     }
 
     uploadImage(event: any) {

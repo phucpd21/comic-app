@@ -9,8 +9,9 @@
                 <th scope="col">Ảnh</th>
                 <th scope="col">Thể loại</th>
                 <th scope="col">Tác giả</th>
-                <th scope="col">Miêu tả</th>
                 <th scope="col">Số tập</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Miêu tả</th>
                 <th scope="col">Lượt xem</th>
                 <th class="text-center">Hành động</th>
             </tr>
@@ -20,17 +21,18 @@
                 <th scope="row">{{ i+1 }}</th>
                 <td>{{ comic.name }}</td>
                 <td class="image">
-                    <img src="http://st.imageinstant.net/data/comics/78/toi-da-chuyen-sinh-thanh-slime.jpg" alt="image">
+                    <img src="{{ comic.image }}" alt="image">
                 </td>
                 <td>{{ comic.category.name }}</td>
                 <td>{{ comic.author.name }}</td>
-                <td>{{ comic.desc }}</td>
                 <td>{{ comic.chapters }}</td>
+                    <td>{{ comic.status==1 ? 'Hoàn thành' : 'Đang tiến hành' }}</td>
+                <td>{{ comic.descs }}</td>
                 <td>{{ comic.views }}</td>
                 <td class="text-center">
-                    <a href="javascript:;" class="btn btn-outline-primary">Sửa</a>
+                    <a href="javascript:;" class="btn btn-outline-primary" routerLink="/admin/comic-edit/{{ comic.id }}" >Sửa</a>
                     <span class="mx-1"></span>
-                    <a href="javascript:;" class="btn btn-outline-danger">Xóa</a>
+                    <a href="javascript:;" class="btn btn-outline-danger" (click)="onRemove(comic.id)" >Xóa</a>
                 </td>
             </tr>
         </tbody>
