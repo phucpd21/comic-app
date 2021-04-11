@@ -1,26 +1,101 @@
 <h5 class="header-title">THÊM TRUYỆN</h5>
 
-<div class="form-new-comic col-6 mx-auto">
-    <form action="javascript:;">
-        <div class="row mb-2">
-            <label class="col-form-label col-2">Tên truyện: </label>
-            <div class="col-10">
-                <input type="text" class="form-control">
+<div class="row">
+    
+    <div class="form-new-comic col-6">
+        <form action="javascript:;" [formGroup]="FormComic" (ngSubmit)="onSubmit()">
+            <div class="row mb-3">
+                <label class="col-form-label col-2 text-end">Tên truyện:</label>
+                <div class="col-10">
+                    <input type="text" class="form-control" formControlName="name">
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label class="col-form-label col-2 text-end">Thể loại:</label>
+                <div class="col-10">
+                    <select class="form-select" formControlName="cate_id">
+                        <option [ngValue]="null" disabled>Chọn thể loại</option>
+                        <option [ngValue]="2">Thể loại 1</option>
+                        <option [ngValue]="2">Thể loại 2</option>
+                    </select>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label class="col-form-label col-2 text-end">Ảnh:</label>
+                <div class="col-10">
+                    <input type="file" class="form-control" formControlName="image" (change)="uploadImage($event)">
+                </div>
+            </div>
+    
+            <!-- <div class="row mb-3">
+                <label class="col-form-label col-2 text-end">Tác giả:</label>
+                <div class="col-10">
+                    <select class="form-select" formControlName="au_id">
+                        <option [ngValue]="null">Chọn tác giả</option>
+                    </select>
+                </div>
+            </div> -->
+            <!-- Test tác giả -->
+            <div class="row mb-3">
+                <label class="col-form-label col-2 text-end">Tác giả:</label>
+                <div class="col-10 box-input-author">
+                    <input type="text" class="form-control" formControlName="au_id"  (keyup)="FindAuthor($event)">
+                    <div class="box-list-author">
+                        <div *ngIf="checkAuthor">
+                            <ul>
+                                <li *ngFor="let author of authors" name="author_name" value="{{ author.id }}" (click)=chooseAuthor($event)>{{ author.name }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label class="col-form-label col-2 text-end">Tập số:</label>
+                <div class="col-10">
+                    <input type="number" class="form-control" formControlName="chapters">
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label class="col-form-label col-2 text-end">Lượt xem:</label>
+                <div class="col-10">
+                    <input type="number" class="form-control" formControlName="views">
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label class="form-label col-2 text-end">Miêu tả:</label>
+                <div class="col-10">
+                    <textarea class="form-control" rows="4" formControlName="descs"></textarea>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="form-label col-2"></label>
+                <div class="col-10">
+                    <button  type="submit" class="btn btn-success w-100">Thêm ngay</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="image-preview col-3">
+        <div class="row">
+            <label class="col-9">Ảnh xem trước: </label>
+            <div class="col-3">
+                <a href="javascript:;" (click)="removeImage()" >Gỡ</a>
             </div>
         </div>
-
-
-        <div class="row mb-3">
-            <label class="col-form-label col-2">Thể loại</label>
-            <select class="form-select col-10">
-                <option value="1">Thể loại 1</option>
-                <option value="2">Thể loại 2</option>
-                <option value="3">Thể loại 3</option>
-            </select>
+        <div class="" *ngIf="image">
+            <img src="{{ image }}" alt="">
         </div>
-        <div class="mb-3">
-            <label class="form-label">Tên truyện: </label>
-            <input type="text" class="form-control">
+        <div class="" *ngIf="!image">
+            <img src="https://ibiene.com/wp-content/uploads/2016/12/demo-image.jpg" alt="">
         </div>
-    </form>
+        <!-- <img src="http://st.imageinstant.net/data/comics/146/nguyen-ton.jpg" alt=""> -->
+    </div>
+
 </div>

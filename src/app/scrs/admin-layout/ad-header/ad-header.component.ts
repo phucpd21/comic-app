@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./ad-header.component.css']
 })
 export class AdHeaderComponent implements OnInit {
-  
+
   constructor(
     private categoryService: CategoryService,
     private route: ActivatedRoute,

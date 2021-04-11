@@ -11,17 +11,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td class="text-center">5</td>
+            <tr *ngFor="let author of authors; index as i">
+                <th scope="row">{{ i+1 }}</th>
+                <td>{{ author.name }}</td>
+                <td class="text-center">{{ author.comics.length }}</td>
                 <td class="text-end">
                     <a href="javascript:;" class="btn btn-outline-primary">Sửa</a>
                     <span class="mx-1"></span>
                     <a href="javascript:;" class="btn btn-outline-danger">Xóa</a>
                 </td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <th scope="row">2</th>
                 <td>Jacob</td>
                 <td class="text-center">3</td>
@@ -40,7 +40,7 @@
                     <span class="mx-1"></span>
                     <a href="javascript:;" class="btn btn-outline-danger">Xóa</a>
                 </td>
-            </tr>
+            </tr> -->
         </tbody>
     </table>
 </div>

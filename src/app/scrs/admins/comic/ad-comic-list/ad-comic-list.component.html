@@ -6,49 +6,27 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tên</th>
+                <th scope="col">Ảnh</th>
                 <th scope="col">Thể loại</th>
                 <th scope="col">Tác giả</th>
-                <!-- <th scope="col">Ảnh</th>
-                <th scope="col">Miêu tả</th> -->
+                <th scope="col">Miêu tả</th>
                 <th scope="col">Số tập</th>
                 <th scope="col">Lượt xem</th>
                 <th class="text-center">Hành động</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Otto</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td class="text-center">
-                    <a href="javascript:;" class="btn btn-outline-primary">Sửa</a>
-                    <span class="mx-1"></span>
-                    <a href="javascript:;" class="btn btn-outline-danger">Xóa</a>
+            <tr *ngFor="let comic of comics; index as i">
+                <th scope="row">{{ i+1 }}</th>
+                <td>{{ comic.name }}</td>
+                <td class="image">
+                    <img src="http://st.imageinstant.net/data/comics/78/toi-da-chuyen-sinh-thanh-slime.jpg" alt="image">
                 </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>Thornton</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td class="text-center">
-                    <a href="javascript:;" class="btn btn-outline-primary">Sửa</a>
-                    <span class="mx-1"></span>
-                    <a href="javascript:;" class="btn btn-outline-danger">Xóa</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td >Jond</td>
-                <td >Larry the Bird</td>
-                <td >Larry the Bird</td>
-                <td >Larry the Bird</td>
-                <td>@twitter</td>
+                <td>{{ comic.category.name }}</td>
+                <td>{{ comic.author.name }}</td>
+                <td>{{ comic.desc }}</td>
+                <td>{{ comic.chapters }}</td>
+                <td>{{ comic.views }}</td>
                 <td class="text-center">
                     <a href="javascript:;" class="btn btn-outline-primary">Sửa</a>
                     <span class="mx-1"></span>

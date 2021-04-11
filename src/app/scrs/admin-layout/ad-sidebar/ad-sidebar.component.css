@@ -40,6 +40,9 @@ ul {
 .ul-secondary li a:hover {
     background-color: #3b455f;
 }
+.ul-secondary li a:active {
+    background-color: #343c53;
+}
 
 span {
     padding-left: 32px;

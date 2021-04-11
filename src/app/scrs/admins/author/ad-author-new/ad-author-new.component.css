@@ -1,0 +1,9 @@
+.header-title {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.form-new-author {
+    /* margin-right: 0; */
+}

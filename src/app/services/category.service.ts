@@ -15,6 +15,10 @@ export class CategoryService {
         return this.http.get<Category[]>(this.API_URL);
     }
 
+    getsAll():Observable<Category[]> {
+        return this.http.get<Category[]>(`${this.API_URL}/_fulldata`);
+    }
+
     findById(id:Number):Observable<Category> {
         return this.http.get<Category>(`${this.API_URL}/${id}/comics`);
     }
@@ -25,5 +29,9 @@ export class CategoryService {
 
     update(id:Number, data:Category):Observable<Category> {
         return this.http.patch<Category>(`${this.API_URL}/${id}`, data);
+    }
+
+    delete(id:Number):Observable<Category> {
+        return this.http.delete<Category>(this.API_URL);
     }
 }

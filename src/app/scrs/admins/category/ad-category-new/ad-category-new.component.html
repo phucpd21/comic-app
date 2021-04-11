@@ -1,1 +1,23 @@
-<p>ad-category-new works!</p>
+<h5 class="header-title">THÊM THỂ LOẠI TRUYỆN</h5>
+
+<div class="row">
+    
+    <div class="form-new-category col-6">
+        <form action="javascript:;" (ngSubmit)="onSubmit()" [formGroup]="FormCate">
+            <div class="row mb-2">
+                <label class="col-form-label col-3 text-end">Tên thể loại:</label>
+                <div class="col-9">
+                    <input type="text" class="form-control" formControlName="name" >
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label class="form-label col-3"></label>
+                <div class="col-9">
+                    <button  type="submit" class="btn btn-success w-100">Thêm ngay</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

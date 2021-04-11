@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,9 @@ import { AdComicEditComponent } from './scrs/admins/comic/ad-comic-edit/ad-comic
 import { AdAuthorEditComponent } from './scrs/admins/author/ad-author-edit/ad-author-edit.component';
 import { AdAuthorListComponent } from './scrs/admins/author/ad-author-list/ad-author-list.component';
 import { AdAuthorNewComponent } from './scrs/admins/author/ad-author-new/ad-author-new.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -43,12 +47,17 @@ import { AdAuthorNewComponent } from './scrs/admins/author/ad-author-new/ad-auth
     AdComicEditComponent,
     AdAuthorEditComponent,
     AdAuthorListComponent,
-    AdAuthorNewComponent
+    AdAuthorNewComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    // FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

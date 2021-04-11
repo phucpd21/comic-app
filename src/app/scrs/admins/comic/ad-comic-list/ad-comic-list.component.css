@@ -2,3 +2,16 @@
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
 }
+.image {
+    max-width: 100px;
+}
+.image img{
+    height: 150px;
+    object-fit: cover;
+}
+/* tbody tr td {
+    vertical-align: middle;
+}
+tbody tr th {
+    vertical-align: middle;
+} */
