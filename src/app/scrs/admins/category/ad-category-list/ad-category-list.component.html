@@ -18,7 +18,7 @@
                 <td class="text-end">
                     <a href="javascript:;" routerLink="/admin/category-edit/{{ category.id }}" class="btn btn-outline-primary">Sửa</a>
                     <span class="mx-1"></span>
-                    <a href="javascript:;" class="btn btn-outline-danger">Xóa</a>
+                    <a href="javascript:;" class="btn btn-outline-danger" (click)="onRemove(category.id)" >Xóa</a>
                 </td>
             </tr>
 

@@ -20,5 +20,16 @@ export class AdCategoryListComponent implements OnInit {
         });
     }
 
+    onRemove(cateId: Number) {
+        if(confirm('Xóa ngay')) {
+            console.log(cateId);
+            this.categoryService.delete(cateId).subscribe(res => {
+                this.categoryService.getsAll().subscribe(res => {
+                    this.categories = res;
+                });
+            });
+        }
+    }
+
 
 }

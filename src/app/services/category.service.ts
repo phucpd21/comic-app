@@ -28,11 +28,12 @@ export class CategoryService {
     }
 
     update(id:Number, data:Category):Observable<Category> {
+        console.log(`${this.API_URL}/${id}`);
         return this.http.patch<Category>(`${this.API_URL}/${id}`, data);
     }
 
     delete(id:Number):Observable<Category> {
-        return this.http.delete<Category>(this.API_URL);
+        return this.http.delete<Category>(`${this.API_URL}/${id}`);
     }
 
     findByAllWord(word:string): Observable<Category> {

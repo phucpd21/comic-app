@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
-
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-ad-category-new',
@@ -16,6 +16,7 @@ export class AdCategoryNewComponent implements OnInit {
 
     constructor(
         private categoryService: CategoryService,
+        private router: Router,
     ) {
         this.FormCate = this.CreateFormGroup();
     }
@@ -41,7 +42,7 @@ export class AdCategoryNewComponent implements OnInit {
     onSubmit() {
         if(this.FormCate.valid && this.validCate) {
             this.categoryService.addNew(this.FormCate.value).subscribe(data => {
-                console.log(data);
+                this.router.navigate(['/admin/category-list']);
             });
         }
     }

@@ -21,7 +21,6 @@ export class AdComicNewComponent implements OnInit {
     categories: Category[] = [];
     image!: string;
     validName:Boolean = true;
-
     downloadURL!: Observable<string>;
 
     constructor(
@@ -32,14 +31,12 @@ export class AdComicNewComponent implements OnInit {
         private router: Router,
     ) { this.FormComic = this.CreateFormGroup() }
 
-    checkName() {
-        let wordValue = this.FormComic.value.name.trim() ? this.FormComic.value.name : '_';
-        this.comicService.findFullWord(wordValue).subscribe(data => {
-            if(data) {
-                this.validName = false;
-            } else {
-                this.validName = true;
-            }
+    ngOnInit(): void {
+        this.authorService.getAll().subscribe(data => {
+            this.authors = data;
+        });
+        this.categoryService.getAll().subscribe(data => {
+            this.categories = data;
         });
     }
 
@@ -72,22 +69,27 @@ export class AdComicNewComponent implements OnInit {
         return this.FormComic.controls;
     }
 
-    ngOnInit(): void {
-        this.authorService.getAll().subscribe(data => {
-            this.authors = data;
-        });
-        this.categoryService.getAll().subscribe(data => {
-            this.categories = data;
-        });
+    onSubmit() {
+        this.comicService.findFullWord(this.FormComic.value.name).subscribe(data => {
+            if(data) return;
+            if (this.FormComic.valid && this.validName) {
+                this.FormComic.value.image = this.image;
+                this.comicService.addNew(this.FormComic.value).subscribe(res => {
+                    this.router.navigate(['/admin/comic-list']);
+                });
+            }
+        })
     }
 
-    onSubmit() {
-        if (this.FormComic.valid && this.validName) {
-            this.FormComic.value.image = this.image;
-            this.comicService.addNew(this.FormComic.value).subscribe(data => {
-                this.router.navigate(['/admin/comic-list']);
-            });
-        }
+    checkName() {
+        let wordValue = this.FormComic.value.name.trim() ? this.FormComic.value.name : '_';
+        this.comicService.findFullWord(wordValue).subscribe(data => {
+            if(data) {
+                this.validName = false;
+            } else {
+                this.validName = true;
+            }
+        });
     }
 
     uploadImage(event: any) {
@@ -111,9 +113,6 @@ export class AdComicNewComponent implements OnInit {
             });
     }
 
-    removeImage() {
-        // this.FormComic.value.image = '';
-    }
 
 
 }

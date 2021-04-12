@@ -16,31 +16,11 @@
                 <td>{{ author.name }}</td>
                 <td class="text-center">{{ author.comics.length }}</td>
                 <td class="text-end">
-                    <a href="javascript:;" class="btn btn-outline-primary">Sửa</a>
+                    <a href="javascript:;" class="btn btn-outline-primary" routerLink="/admin/author-edit/{{ author.id }}" >Sửa</a>
                     <span class="mx-1"></span>
-                    <a href="javascript:;" class="btn btn-outline-danger">Xóa</a>
+                    <a href="javascript:;" class="btn btn-outline-danger" (click)="removeAuthor(author.id)" >Xóa</a>
                 </td>
             </tr>
-            <!-- <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td class="text-center">3</td>
-                <td class="text-end">
-                    <a href="javascript:;" class="btn btn-outline-primary">Sửa</a>
-                    <span class="mx-1"></span>
-                    <a href="javascript:;" class="btn btn-outline-danger">Xóa</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td >Jond</td>
-                <td class="text-center">9</td>
-                <td class="text-end">
-                    <a href="javascript:;" class="btn btn-outline-primary">Sửa</a>
-                    <span class="mx-1"></span>
-                    <a href="javascript:;" class="btn btn-outline-danger">Xóa</a>
-                </td>
-            </tr> -->
         </tbody>
     </table>
 </div>

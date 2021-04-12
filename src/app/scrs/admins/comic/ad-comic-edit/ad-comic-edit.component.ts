@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Comic } from 'src/app/models/comic';
 
 @Component({
     selector: 'app-ad-comic-edit',
@@ -18,12 +19,12 @@ import { Observable } from 'rxjs';
 export class AdComicEditComponent implements OnInit {
 
     FormComic: FormGroup;
+    comic!: Comic;
     authors: Author[] = [];
     categories: Category[] = [];
     image!: string;
     validName: Boolean = true;
     idComic!: Number;
-
     downloadURL!: Observable<string>;
 
     constructor(
@@ -37,15 +38,46 @@ export class AdComicEditComponent implements OnInit {
         this.FormComic = this.CreateFormGroup()
     }
 
+    ngOnInit(): void {
+        this.authorService.getAll().subscribe(data => this.authors = data );
+        this.categoryService.getAll().subscribe(data => this.categories = data );
+        this.route.params.subscribe(params =>  this.idComic = params.id )
+        
+        this.comicService.findById(this.idComic).subscribe(data => {
+            if (data) {
+                this.comic = data;
+                this.f.name.setValue(data.name);
+                this.f.cate_id.setValue(data.cate_id);
+                this.f.au_id.setValue(data.au_id);
+                this.f.chapters.setValue(data.chapters);
+                this.f.status.setValue(data.status);
+                this.f.views.setValue(data.views);
+                this.f.descs.setValue(data.descs);
+                this.image = data.image;
+            } else {
+                this.router.navigate(['/admin/comic-list']);
+            }
+        });
+
+    }
+
+    onSubmit() {
+        this.comicService.findFullWord(this.FormComic.value.name).subscribe(data => {
+            if (data && data.id != this.comic.id) return;
+            if (this.FormComic.valid) {
+                this.FormComic.value.image = this.image;
+                this.comicService.update(this.idComic, this.FormComic.value).subscribe(data => {
+                    this.router.navigate(['/admin/comic-list']);
+                });
+            }
+        });
+    }
+
     checkName() {
         let wordValue = this.FormComic.value.name ? this.FormComic.value.name : '_';
         this.comicService.findFullWord(wordValue).subscribe(data => {
-            if (data) {
-                if(data.name != this.FormComic.value.name) {
-                    this.validName = false;
-                } else {
-                    this.validName = true;
-                }
+            if (data && data.id != this.comic.id) {
+                this.validName = false;
             } else {
                 this.validName = true;
             }
@@ -53,65 +85,35 @@ export class AdComicEditComponent implements OnInit {
     }
 
     CreateFormGroup() {
-        return new FormGroup({
-            name: new FormControl('', [
-                Validators.required,
-                Validators.minLength(3),
-            ]),
-            cate_id: new FormControl('', [
-                Validators.required
-            ]),
-            au_id: new FormControl('', [
-                Validators.required,
-            ]),
-            descs: new FormControl(''),
-            views: new FormControl(''),
-            status: new FormControl('', [
-                Validators.required
-            ]),
-            image: new FormControl(''),
-            chapters: new FormControl('', [
-                Validators.required
-            ]),
-        });
+    return new FormGroup({
+        name: new FormControl('', [
+            Validators.required,
+            Validators.minLength(3),
+        ]),
+        cate_id: new FormControl('', [
+            Validators.required
+        ]),
+        au_id: new FormControl('', [
+            Validators.required,
+        ]),
+        descs: new FormControl(''),
+        views: new FormControl(''),
+        status: new FormControl('', [
+            Validators.required
+        ]),
+        image: new FormControl(''),
+        chapters: new FormControl('', [
+            Validators.required
+        ]),
+    });
     }
     get f() {
         return this.FormComic.controls;
     }
 
-    ngOnInit(): void {
-        this.authorService.getAll().subscribe(data => {
-            this.authors = data;
-        });
-        this.categoryService.getAll().subscribe(data => {
-            this.categories = data;
-        });
-        const id = this.route.params.subscribe(params => {
-            this.idComic = params.id
-        })
-        this.comicService.findById(this.idComic).subscribe(data => {
-            this.f.name.setValue(data.name);
-            this.f.cate_id.setValue(data.cate_id);
-            this.f.au_id.setValue(data.au_id);
-            this.f.chapters.setValue(data.chapters);
-            this.f.status.setValue(data.status);
-            this.f.views.setValue(data.views);
-            this.f.descs.setValue(data.descs);
-            // this.f.image.setValue(data.image);
-            this.image = data.image;
 
-        });
 
-    }
 
-    onSubmit() {
-        if (this.FormComic.valid && this.validName) {
-            this.FormComic.value.image = this.image;
-            this.comicService.addNew(this.FormComic.value).subscribe(data => {
-                this.router.navigate(['/admin/comic-list']);
-            });
-        }
-    }
 
     uploadImage(event: any) {
         var n = Date.now();

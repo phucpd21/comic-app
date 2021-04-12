@@ -1,15 +1,15 @@
 <h5 class="header-title">THÊM TÁC GIẢ</h5>
 
 <div class="row">
-    
+
     <div class="form-new-author col-6">
         <form action="javascript:;" [formGroup]="FormAuthor" (ngSubmit)="onSubmit()">
             <div class="row mb-2">
                 <label class="col-form-label col-3 text-end">Tên tác giả:</label>
                 <div class="col-9">
-                    <input type="text" class="form-control" formControlName="name">
+                    <input type="text" class="form-control" formControlName="name" (keyup)="checkAuthor()">
 
-                    <div  *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)" class="alert alert-warning">
+                    <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)" class="alert alert-warning">
                         <div *ngIf="f.name.errors?.required">
                             Tên bắt buộc
                         </div>
@@ -17,13 +17,17 @@
                             Không dưới 3 ký tự
                         </div>
                     </div>
+                    <div *ngIf="!validAuthor" class="alert alert-warning">
+                        Tên tác giả đã tồn tại
+                    </div>
                 </div>
             </div>
-    
+
             <div class="row mb-3">
                 <label class="form-label col-3"></label>
                 <div class="col-9">
-                    <button  type="submit" class="btn btn-success w-100" [disabled]="!FormAuthor.valid">Thêm ngay</button>
+                    <button type="submit" class="btn btn-success w-100" [disabled]="!FormAuthor.valid || !validAuthor">Thêm
+                        ngay</button>
                 </div>
             </div>
         </form>
