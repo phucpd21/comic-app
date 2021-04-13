@@ -5,7 +5,8 @@
 }
 
 .logo {
-    width: 2000px;
+    /* width: 2000px; */
+    width: 1020px;
     line-height: 48px;
     padding-left: 15px;
     color: white;
@@ -25,4 +26,21 @@
 .search input:focus {
     border-color: rgb(119, 118, 118);
     box-shadow: none;
+}
+
+.client {
+    line-height: 48px;
+}
+.client a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 5px 8px;
+}
+.client a:hover {
+    transition: all ease-in 0.1s;
+    color: coral;
+    background-color: white;
 }

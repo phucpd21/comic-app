@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Comic } from 'src/app/models/comic';
+import { ComicService } from 'src/app/services/comic.service';
 
 @Component({
   selector: 'app-cl-home',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClHomeComponent implements OnInit {
 
-  constructor() { }
+  comics: Comic[] = [];
+
+  constructor(
+    private comicService: ComicService,
+  ) { }
 
   ngOnInit(): void {
+    this.comicService.getsAll().subscribe(data => {
+      this.comics = data;
+    })
+  }
+
+  sortOrder() {
+    this.comics = this.comics.reverse();
   }
 
 }

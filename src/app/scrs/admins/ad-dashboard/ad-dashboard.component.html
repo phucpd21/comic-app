@@ -1,1 +1,33 @@
-<p>ad-dashboard works!</p>
+<h5 class="header-title">Dashboard</h5>
+
+<div class="row list-tool">
+    <div class="col-3 item">
+        <div class="item1" routerLink="comic-list">
+            <div class="title">
+                Tổng số truyện
+            </div>
+            <div class="data">{{ fomatN(comics.length) }}</div>
+        </div>
+    </div>
+
+    <div class="col-3 item">
+        <div class="item2">
+            <div class="title">Tổng số Tác giả</div>
+            <div class="data">{{ fomatN(authors.length) }}</div>
+        </div>
+    </div>
+
+    <div class="col-3 item">
+        <div class="item3">
+            <div class="title">Tổng số danh mục</div>
+            <div class="data">{{ fomatN(categories.length) }}</div>
+        </div>
+    </div>
+
+    <div class="col-3 item">
+        <div class="item4">
+            <div class="title">Tổng số lượt xem</div>
+            <div class="data">{{ fomatN(views) }}</div>
+        </div>
+    </div>
+</div>

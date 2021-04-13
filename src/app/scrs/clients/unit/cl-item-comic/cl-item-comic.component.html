@@ -1,0 +1,20 @@
+<div class="item">
+    <a class="item-top" href="javascript:;"  routerLink="/comic/{{ comic_item.id }}">
+        <img class="item-image" src="{{ comic_item.image }}" alt="">
+        <div class="item-top-info">
+            <!-- <span class="info__views">
+                <i class="fas fa-eye"></i>Views: {{ comic_item.views }}
+            </span> -->
+            <!-- <span class="info__"></span> -->
+        </div>
+    </a>
+    <div class="item-title">
+        <a href="javascript:;" routerLink="/comic/{{ comic_item.id }}">
+            <div class="item-name"> {{ comic_item.name }}</div>
+            <div class="item-bottom">
+                <div class="views">View {{ fomatN(comic_item.views) }}</div>
+                <div class="chapters">Chapter {{ fomatN(comic_item.chapters) }} </div>
+            </div>
+        </a>
+    </div>
+</div>

@@ -1,1 +1,61 @@
-<p>cl-header works!</p>
+<header>
+    <div class="" style="background-color: rgb(68, 73, 73);">
+        <div class="row py-1 container-handed">
+            <div class="col-7 d-flex d-flex justify-content-between px-0">
+                <a href="/" class="logo">Logo</a>
+                <!-- <form class="d-flex w-75">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form> -->
+            </div>
+            <div class="form-input-hander col-5 d-flex  align-items-center">
+                <input type="text" class="form-control" placeholder="Tìm truyện..." (keyup)="search($event)">
+                <div class="list-result-comic" *ngIf="comics">
+                    <ul>
+                        <li *ngFor="let comic of comics"  (click)="changeClass()" routerLink="comic/{{ comic.id }}">
+                            <a href="javascript:;" class="result-item">
+                                <div class="result-image">
+                                    <img src="{{ comic.image }}" alt="">
+                                </div>
+                                <div class="result-detail">
+                                    <div class="detail-name">{{ comic.name }}</div>
+                                    <div class="detail-chapter">Chapter: {{ fomatN( comic.chapters ) }}</div>
+                                    <div class="detail-info">
+                                        <p>
+                                            <i>
+                                                {{ comic.author.name}} - {{ comic.category.name }} - 
+                                                <span *ngIf="comic.status==1">Hoàn thành - </span> 
+                                                <span *ngIf="comic.status==2">Đang tiến hành - </span>
+                                                {{ comic.descs}}
+                                            </i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="" style="background-color: #e4e4e4;">
+        <div class="row container-handed">
+            <ul class="menu-list">
+                <li><a href="javascript:;" routerLink="">Trang chủ</a></li>
+                <li class="dropdown_categories">
+                    Thể loại
+                    <ul class="list_dropdown_categories">
+                        <li *ngFor="let comic_cate of categories"><a routerLink="category/{{ comic_cate.id }}"
+                                href="javascript:;" (click)=clickLi()>{{ comic_cate.name }}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;">Giới thiệu</a></li>
+                <li><a href="javascript:;" routerLink="/admin">Quản trị</a></li>
+
+            </ul>
+        </div>
+    </div>
+</header>

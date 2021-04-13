@@ -34,14 +34,16 @@ export class AdAuthorNewComponent implements OnInit {
     get f() { return this.FormAuthor.controls }
 
     checkAuthor() {
-        this.authorService.findFullWord(this.FormAuthor.value.name).subscribe(data => {
+        const wordValue = this.FormAuthor.value.name.trim() ? this.FormAuthor.value.name.trim() : '_';
+        this.authorService.findFullWord(wordValue).subscribe(data => {
             if (data) this.validAuthor = false;
             else this.validAuthor = true;
         });
     }
 
     onSubmit() {
-        this.authorService.findFullWord(this.FormAuthor.value.name).subscribe(data => {
+        const wordValue = this.FormAuthor.value.name.trim() ? this.FormAuthor.value.name.trim() : '_';
+        this.authorService.findFullWord(wordValue).subscribe(data => {
             if (data) return;
             if (this.FormAuthor.valid && this.validAuthor) {
                 this.authorService.addNew(this.FormAuthor.value).subscribe(data => {

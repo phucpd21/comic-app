@@ -7,7 +7,7 @@ import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize} from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,7 +20,7 @@ export class AdComicNewComponent implements OnInit {
     authors: Author[] = [];
     categories: Category[] = [];
     image!: string;
-    validName:Boolean = true;
+    validName: Boolean = true;
     downloadURL!: Observable<string>;
 
     constructor(
@@ -70,8 +70,9 @@ export class AdComicNewComponent implements OnInit {
     }
 
     onSubmit() {
-        this.comicService.findFullWord(this.FormComic.value.name).subscribe(data => {
-            if(data) return;
+        let word = this.FormComic.value.name.trim() ? this.FormComic.value.name.trim() : '_';
+        this.comicService.findFullWord(word).subscribe(data => {
+            if (data) return;
             if (this.FormComic.valid && this.validName) {
                 this.FormComic.value.image = this.image;
                 this.comicService.addNew(this.FormComic.value).subscribe(res => {
@@ -82,9 +83,9 @@ export class AdComicNewComponent implements OnInit {
     }
 
     checkName() {
-        let wordValue = this.FormComic.value.name.trim() ? this.FormComic.value.name : '_';
+        let wordValue = this.FormComic.value.name.trim() ? this.FormComic.value.name.trim() : '_';
         this.comicService.findFullWord(wordValue).subscribe(data => {
-            if(data) {
+            if (data) {
                 this.validName = false;
             } else {
                 this.validName = true;
@@ -92,25 +93,40 @@ export class AdComicNewComponent implements OnInit {
         });
     }
 
+    // uploadImage(event: any) {
+    //     var n = Date.now();
+    //     const file = event.target.files[0];
+    //     const filePath = `Uploads/${n}`;
+    //     const fileRef = this.storage.ref(filePath);
+    //     const task = this.storage.upload(`Uploads/${n}`, file);
+    //     task
+    //         .snapshotChanges()
+    //         .pipe(
+    //             finalize(() => {
+    //                 this.downloadURL = fileRef.getDownloadURL();
+    //                 this.downloadURL.subscribe(url => {
+    //                     this.image = url;
+    //                     this.FormComic.value.image = url;
+    //                 });
+    //             })
+    //         ).subscribe(url => {
+    //             if (url) { console.log('url 2: ', url) }
+    //         });
+    // }
     uploadImage(event: any) {
-        var n = Date.now();
-        const file = event.target.files[0];
-        const filePath = `Uploads/${n}`;
-        const fileRef = this.storage.ref(filePath);
-        const task = this.storage.upload(`Uploads/${n}`, file);
-        task
-            .snapshotChanges()
-            .pipe(
-                finalize(() => {
-                    this.downloadURL = fileRef.getDownloadURL();
-                    this.downloadURL.subscribe(url => {
-                        this.image = url;
-                        this.FormComic.value.image = url;
-                    });
-                })
-            ).subscribe(url => {
-                if (url) { console.log('url 2: ', url) }
+        if (event.target.files.length > 0) {
+            let file = event.target.files[0];
+            let n: Number = Date.now();
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('key', `${n}`);
+
+            this.comicService.uploadFile(formData).subscribe(res => {
+                //res = {image: 'link_image'}
+                this.image = res.image;
+                this.FormComic.value.image = res.image;
             });
+        }
     }
 
 

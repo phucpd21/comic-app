@@ -37,7 +37,7 @@ export class AuthorService {
   }
 
   findByWord(word:string):Observable<Author[]> {
-    return this.http.get<Author[]>(`${this.API_URL}/${word}`);
+    return this.http.get<Author[]>(`${this.API_URL}/${word}/_parttext`);
   }
 
   findFullWord(word:string):Observable<Author> {

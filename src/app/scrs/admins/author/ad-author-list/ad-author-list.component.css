@@ -1,4 +1,15 @@
-.header-title {
+.header {
+    align-items: center;
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
+    display: grid;
+    grid-template-columns: 6fr 3fr 6fr;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.header h5{
+    margin: 0;
+}
+.search input{
+    border-radius: 10px;
 }

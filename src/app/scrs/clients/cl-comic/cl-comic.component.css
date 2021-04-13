@@ -1,0 +1,172 @@
+body {
+  background-color: #f7f5f5;
+}
+
+.sidebar {
+  background-color: white;
+  margin-top: 16px;
+}
+
+.main {
+    border: 1px solid #dee2e6;
+}
+
+.col-test {
+  flex: 0 0 auto;
+  width: 20%;
+}
+
+.container {
+  max-width: 1030px;
+  min-height: 100vh;
+  /* background-color: #f7f5f5; */
+}
+
+.container>div {}
+
+.form-select {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.sort_order {
+  /* width: 300px; */
+  margin-bottom: 0;
+}
+
+.sort_order label {
+  margin-bottom: 0;
+}
+
+.sort_order .form-select {
+  width: 100px;
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.btn-rese {
+  border: 1px solid #ccc;
+  padding: 1px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  color: rgb(65, 65, 65);
+}
+
+.btn-rese:hover {
+  /* transform: scale(1.001); */
+}
+
+.btn-rese:active {
+  transform: scale(0.98);
+}
+
+.category-title {
+  font-size: 20px;
+}
+
+.content-main {
+  /* border: 1px solid #dee2e6; */
+  background-color: white;
+  margin-top: 16px;
+  /* padding: 0 16px; */
+  padding-top: 16px;
+}
+
+.content-main .box-title {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.content-main h4 {
+  padding: 16px;
+  padding-left: 0;
+}
+
+.comic-detail {
+  padding-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-column-gap: 35px;
+  margin-bottom: 30px;
+  margin: 0 16px !important;
+}
+
+.comic-detail .comic-image {
+  padding: 5px;
+  width: 100%;
+  border: 1px solid #dee2e6;
+  border-radius: 3px;
+}
+
+.comic-detail .comic-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.comic-info h5 {
+  margin-top: 5px;
+  margin-bottom: 45px;
+  font-size: 23px;
+}
+
+.info-top h5 {
+  width: 380px;
+}
+
+.comic-info p {
+  margin-bottom: 7px;
+}
+
+.comic-info .span-title {
+  font-weight: 500;
+  color: rgb(58, 58, 58);
+  /* font-size: 15px; */
+}
+
+.comic-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.btn-read {
+  background-color: #ccc;
+  margin-right: 10px;
+  padding: 8px 15px;
+  text-decoration: none;
+  color: black;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.btn-read:hover {
+  background-color: rgb(216, 216, 216);
+}
+
+.btn-read:active {
+  background-color: #ccc;
+}
+.info-bottom {
+    margin-top: 10px;
+}
+.box-grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 1fr 1fr;
+  grid-row-gap: 7px;
+}
+
+.content-desc {
+    display: block;
+    margin-top: 30px;
+    padding: 16px;
+}
+.content-desc h6 {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 5px;
+    color: rgb(49, 49, 49);
+}
+.content-desc p {
+    color: rgb(77, 77, 77);
+    font-size: 15px;
+}

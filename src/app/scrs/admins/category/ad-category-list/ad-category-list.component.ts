@@ -8,7 +8,7 @@ import { CategoryService } from 'src/app/services/category.service';
     styleUrls: ['./ad-category-list.component.css']
 })
 export class AdCategoryListComponent implements OnInit {
-
+    
     categories: Category[] = [];
 
     constructor(private categoryService: CategoryService) { }
@@ -16,19 +16,24 @@ export class AdCategoryListComponent implements OnInit {
     ngOnInit(): void {
         this.categoryService.getsAll().subscribe(data => {
             this.categories = data;
-            console.log(this.categories);
         });
     }
 
     onRemove(cateId: Number) {
         if(confirm('Xóa ngay')) {
-            console.log(cateId);
             this.categoryService.delete(cateId).subscribe(res => {
                 this.categoryService.getsAll().subscribe(res => {
                     this.categories = res;
                 });
             });
         }
+    }
+
+    search(event:any) {
+        let wordsearch = (event.target.value).trim() ? event.target.value : '_'; 
+        this.categoryService.findByWord(wordsearch).subscribe(data => {
+            this.categories = data;
+        })
     }
 
 

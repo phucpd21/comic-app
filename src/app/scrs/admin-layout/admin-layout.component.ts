@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
+  keywords!:string;
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+
 
 }

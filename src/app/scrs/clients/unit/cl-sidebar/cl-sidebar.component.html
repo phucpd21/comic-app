@@ -1,0 +1,28 @@
+<div class="border sidebar-box h-100">
+    <h4 class="p-3 mb-0 border-bottom">
+        Top views
+    </h4>
+    <ul class="top-view">
+        <li *ngFor="let comic of comics; index as i">
+            <a href="javascript:;" routerLink="/comic/{{ comic.id }}">
+                <div class="order">0{{ i+1 }}</div>
+                <div class="item">
+                    <div class="img">
+                        <img src="{{ comic.image }}" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="title">{{ comic.name }}</div>
+                        <div class="content-footer">
+                            <div class="chapter">
+                                Tập: {{ comic.chapters }}
+                            </div>
+                            <div class="views">
+                                Views: {{ fomatN(comic.views) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>

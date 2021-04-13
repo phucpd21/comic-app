@@ -1,0 +1,60 @@
+<body>
+    <div class="container">
+        <div class="row pb-5">
+
+            <div class="content-main col-8 ">
+                <div class="main">
+                    <div class="box-title d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0 ml-3 category-title">Truyện tranh</h4>
+                    </div>
+                    <div class="row">
+                        <div class="comic-detail">
+                            <div class="comic-image">
+                                <img src="{{ comic.image }}" alt="">
+                            </div>
+                            <div class="comic-info">
+                                <div class="info-top">
+
+                                    <h5>{{ comic.name }}</h5>
+                                    <div class="box-grid">
+                                        <span class="span-title">Tác giả: </span>
+                                        <span class="span-value"> {{ comic.author.name }} </span>
+
+                                        <span class="span-title">Danh mục: </span>
+                                        <span class="span-value">
+                                            <a href="javascript:;">{{ comic.category.name }}</a>
+                                        </span>
+                                        <span class="span-title">Lượt xem: </span>
+                                        <span class="span-value">{{ fomatN(comic.views) }}</span>
+
+                                        <span class="span-title">Số tập: </span>
+                                        <span class="span-value">{{ fomatN(comic.chapters) }}</span>
+
+                                        <span class="span-title">Trạng thái: </span>
+                                        <div class="">
+                                            <span class="span-value" *ngIf="comic.status == 1">Hoàn thành</span>
+                                            <span class="span-value" *ngIf="comic.status == 2">Hoàn thành</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-bottom">
+                                    <a href="javascript:;" class="btn-read">Đọc từ đầu</a>
+                                    <a href="javascript:;" class="btn-read">Đọc mới nhất</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-desc">
+                        <h6>Miêu tả ngắn: </h6>
+                        <p>{{ comic.descs }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4 pt-3 sidebar">
+                <app-cl-sidebar ></app-cl-sidebar>
+            </div>
+
+        </div>
+    </div>
+</body>

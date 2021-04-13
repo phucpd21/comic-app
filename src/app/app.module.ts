@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { ClHeaderComponent } from './scrs/client-layout/cl-header/cl-header.component';
 import { ClFooterComponent } from './scrs/client-layout/cl-footer/cl-footer.component';
 import { ClHomeComponent } from './scrs/clients/cl-home/cl-home.component';
-import { ClDetailComponent } from './scrs/clients/cl-detail/cl-detail.component';
 import { ClientLayoutComponent } from './scrs/client-layout/client-layout.component';
 import { AdminLayoutComponent } from './scrs/admin-layout/admin-layout.component';
 import { AdHeaderComponent } from './scrs/admin-layout/ad-header/ad-header.component';
@@ -26,6 +25,11 @@ import { AdAuthorNewComponent } from './scrs/admins/author/ad-author-new/ad-auth
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
+import { FormdataComponent } from './scrs/admins/formdata/formdata.component';
+import { ClCategoryComponent } from './scrs/clients/cl-category/cl-category.component';
+import { ClSidebarComponent } from './scrs/clients/unit/cl-sidebar/cl-sidebar.component';
+import { ClItemComicComponent } from './scrs/clients/unit/cl-item-comic/cl-item-comic.component';
+import { ClComicComponent } from './scrs/clients/cl-comic/cl-comic.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,6 @@ import { environment } from 'src/environments/environment';
     ClHeaderComponent,
     ClFooterComponent,
     ClHomeComponent,
-    ClDetailComponent,
     ClientLayoutComponent,
     AdminLayoutComponent,
     AdHeaderComponent,
@@ -48,6 +51,11 @@ import { environment } from 'src/environments/environment';
     AdAuthorEditComponent,
     AdAuthorListComponent,
     AdAuthorNewComponent,
+    FormdataComponent,
+    ClCategoryComponent,
+    ClSidebarComponent,
+    ClItemComicComponent,
+    ClComicComponent,
     
   ],
   imports: [

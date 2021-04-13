@@ -36,8 +36,16 @@ export class ComicService {
     return this.http.delete<Comic>(`${this.API_URL}/${id}`);
   }
 
-  findFullWord(word:string):Observable<Comic> {
+  findByWord(word:any): Observable<Comic[]> {
+    return this.http.get<Comic[]>(`${this.API_URL}/${word}/_parttext`);
+  }
+
+  findFullWord(word:any):Observable<Comic> {
     return this.http.get<Comic>(`${this.API_URL}/${word}/_fulltext`);
+  }
+
+  uploadFile(data:any): Observable<any> {
+    return this.http.post<any>(`${this.API_URL}/_upload`, data);
   }
 
 }

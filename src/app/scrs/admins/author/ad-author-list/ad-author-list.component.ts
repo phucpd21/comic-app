@@ -28,4 +28,11 @@ export class AdAuthorListComponent implements OnInit {
             })
     }
 
+    search(event:any) {
+        let wordsearch = (event.target.value).trim() ? event.target.value : '_'; 
+        this.authorService.findByWord(wordsearch).subscribe(data => {
+            this.authors = data;
+        })
+    }
+
 }

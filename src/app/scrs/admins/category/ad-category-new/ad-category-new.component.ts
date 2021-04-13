@@ -40,15 +40,19 @@ export class AdCategoryNewComponent implements OnInit {
     }
 
     onSubmit() {
-        if(this.FormCate.valid && this.validCate) {
-            this.categoryService.addNew(this.FormCate.value).subscribe(data => {
-                this.router.navigate(['/admin/category-list']);
-            });
-        }
+        let word = (this.FormCate.value.name).trim() ? (this.FormCate.value.name).trim() : '_';
+        this.categoryService.findByAllWord(word).subscribe(data => {
+            if(data) return;
+            if(this.FormCate.valid) {
+                this.categoryService.addNew(this.FormCate.value).subscribe(data => {
+                    this.router.navigate(['/admin/category-list']);
+                });
+            }
+        });
     }
 
     checkCate() {
-        const wordValue = this.FormCate.value.name.trim() ? this.FormCate.value.name : '_';
+        const wordValue = this.FormCate.value.name.trim() ? this.FormCate.value.name.trim() : '_';
         this.categoryService.findByAllWord(wordValue).subscribe(data => {
             if (data) {
                 this.validCate = false;

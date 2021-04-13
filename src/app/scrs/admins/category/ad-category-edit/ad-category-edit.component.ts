@@ -46,7 +46,8 @@ export class AdCategoryEditComponent implements OnInit {
     get f() { return this.FormCate.controls }
 
     onSubmit() {
-        this.categoryService.findByAllWord(this.FormCate.value.name).subscribe(data => {
+        const wordValue = this.FormCate.value.name.trim() ? this.FormCate.value.name.trim() : '_';
+        this.categoryService.findByAllWord(wordValue).subscribe(data => {
             if (data && data.id != this.category.id) return;
             if (this.FormCate.valid) {
                 this.categoryService.update(this.cateId, this.FormCate.value).subscribe(data => {
@@ -57,7 +58,7 @@ export class AdCategoryEditComponent implements OnInit {
     }
 
     checkCate() {
-        const wordValue = this.FormCate.value.name.trim() ? this.FormCate.value.name : '_';
+        const wordValue = this.FormCate.value.name.trim() ? this.FormCate.value.name.trim() : '_';
         this.categoryService.findByAllWord(wordValue).subscribe(data => {
             if (data) {
                 if (data.id != this.category.id) this.validCate = false;

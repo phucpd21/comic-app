@@ -11,14 +11,17 @@ import { AdCategoryNewComponent } from './scrs/admins/category/ad-category-new/a
 import { AdComicEditComponent } from './scrs/admins/comic/ad-comic-edit/ad-comic-edit.component';
 import { AdComicListComponent } from './scrs/admins/comic/ad-comic-list/ad-comic-list.component';
 import { AdComicNewComponent } from './scrs/admins/comic/ad-comic-new/ad-comic-new.component';
+import { FormdataComponent } from './scrs/admins/formdata/formdata.component';
 import { ClientLayoutComponent } from './scrs/client-layout/client-layout.component';
-import { ClDetailComponent } from './scrs/clients/cl-detail/cl-detail.component';
+import { ClCategoryComponent } from './scrs/clients/cl-category/cl-category.component';
+import { ClComicComponent } from './scrs/clients/cl-comic/cl-comic.component';
 import { ClHomeComponent } from './scrs/clients/cl-home/cl-home.component';
 
 const routes: Routes = [
     {path: "", component: ClientLayoutComponent, children: [
             {path: "", component: ClHomeComponent},
-            {path: "detail/:id", component: ClDetailComponent},
+            {path: "comic/:id", component: ClComicComponent},
+            {path: "category/:id", component: ClCategoryComponent},
         ]
     },
     {path:"admin", component: AdminLayoutComponent, children: [
@@ -34,6 +37,7 @@ const routes: Routes = [
             {path: "author-list", component:AdAuthorListComponent},
             {path: "author-new", component:AdAuthorNewComponent},
             {path: "author-edit/:id", component:AdAuthorEditComponent},
+            {path: "formdata", component:FormdataComponent}
         ]
     },
 ];

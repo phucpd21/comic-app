@@ -111,29 +111,41 @@ export class AdComicEditComponent implements OnInit {
         return this.FormComic.controls;
     }
 
-
-
-
+    // uploadImage(event: any) {
+    //     var n = Date.now();
+    //     const file = event.target.files[0];
+    //     const filePath = `Uploads/${n}`;
+    //     const fileRef = this.storage.ref(filePath);
+    //     const task = this.storage.upload(`Uploads/${n}`, file);
+    //     task
+    //         .snapshotChanges()
+    //         .pipe(
+    //             finalize(() => {
+    //                 this.downloadURL = fileRef.getDownloadURL();
+    //                 this.downloadURL.subscribe(url => {
+    //                     this.image = url;
+    //                     this.FormComic.value.image = url;
+    //                 });
+    //             })
+    //         ).subscribe(url => {
+    //             if (url) { console.log('url 2: ', url) }
+    //         });
+    // }
 
     uploadImage(event: any) {
-        var n = Date.now();
-        const file = event.target.files[0];
-        const filePath = `Uploads/${n}`;
-        const fileRef = this.storage.ref(filePath);
-        const task = this.storage.upload(`Uploads/${n}`, file);
-        task
-            .snapshotChanges()
-            .pipe(
-                finalize(() => {
-                    this.downloadURL = fileRef.getDownloadURL();
-                    this.downloadURL.subscribe(url => {
-                        this.image = url;
-                        this.FormComic.value.image = url;
-                    });
-                })
-            ).subscribe(url => {
-                if (url) { console.log('url 2: ', url) }
+        if (event.target.files.length > 0) {
+            let file = event.target.files[0];
+            let n: Number = Date.now();
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('key', `${n}`);
+
+            this.comicService.uploadFile(formData).subscribe(res => {
+                //res = {image: 'link_image'}
+                this.image = res.image;
+                this.FormComic.value.image = res.image;
             });
+        }
     }
 
 }

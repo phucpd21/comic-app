@@ -1,4 +1,15 @@
-<h5 class="header-title">DANH SÁCH TRUYỆN</h5>
+<div class="header">
+    <div class="title">
+        <h5 class="">DANH SÁCH TRUYỆN</h5>
+    </div>
+    <div class="sort">
+        <!-- Sort -->
+    </div>
+    <div class="search">
+        <input type="text" class="form-control" placeholder="Tìm truyện..." (keyup)="search($event)">
+    </div>
+
+</div>
 
 <div class="table-list-comic">
     <table class="table table-striped">
@@ -11,7 +22,7 @@
                 <th scope="col">Tác giả</th>
                 <th scope="col">Số tập</th>
                 <th scope="col">Trạng thái</th>
-                <th scope="col">Miêu tả</th>
+                <!-- <th scope="col">Miêu tả</th> -->
                 <th scope="col">Lượt xem</th>
                 <th class="text-center">Hành động</th>
             </tr>
@@ -23,12 +34,15 @@
                 <td class="image">
                     <img src="{{ comic.image }}" alt="image">
                 </td>
-                <td>{{ comic.category.name }}</td>
-                <td>{{ comic.author.name }}</td>
+                <td><a href="javascript:;" routerLink="/admin/category-edit/{{ comic.cate_id }}">{{ comic.category.name }}</a></td>
+                <td>
+                    <!-- {{ comic.author.name }} -->
+                    <a href="javascript:;" routerLink="/admin/author-edit/{{ comic.au_id }}"> {{ comic.author.name }}</a>
+                </td>
                 <td>{{ comic.chapters }}</td>
                     <td>{{ comic.status==1 ? 'Hoàn thành' : 'Đang tiến hành' }}</td>
-                <td>{{ comic.descs }}</td>
-                <td>{{ comic.views }}</td>
+                <!-- <td>{{ comic.descs }}</td> -->
+                <td>{{ fomatN(comic.views) }}</td>
                 <td class="text-center">
                     <a href="javascript:;" class="btn btn-outline-primary" routerLink="/admin/comic-edit/{{ comic.id }}" >Sửa</a>
                     <span class="mx-1"></span>

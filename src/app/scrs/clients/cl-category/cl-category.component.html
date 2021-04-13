@@ -3,11 +3,11 @@
 
         <div class="col-8 p-0">
             <div class="d-flex justify-content-between align-items-center border-bottom mb-4 mt-3 ml-3 mr-3">
-                <h4 class="py-3 mb-0 category-title">Danh sách truyện</h4>
-                <a href="javascript:;" class="btn-rese" (click)="sortOrder()">Đảo chiều</a>
+                <h4 class="py-3 mb-0 category-title">Thể loại: {{ cate.name }}</h4>
+                <a href="javascript:;" class="btn-rese" (click)="sortOrder($event)">Đảo chiều</a>
             </div>
             <div class="row px-4">
-                <div *ngFor="let comic of comics" class="col-3 px-2">
+                <div *ngFor="let comic of cate.comics" class="col-3 px-2">
                     <app-cl-item-comic [comic_item]='comic'></app-cl-item-comic>
                 </div>
             </div>

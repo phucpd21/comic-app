@@ -1,0 +1,15 @@
+.container-handed {
+    max-width: 1030px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+footer {
+    background-color: #e4e4e4;
+    height: 70px;
+}
+.copy-right {
+    line-height: 70px;
+}
