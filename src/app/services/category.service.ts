@@ -16,11 +16,11 @@ export class CategoryService {
     }
 
     getsAll():Observable<Category[]> {
-        return this.http.get<Category[]>(`${this.API_URL}/_fulldata`);
+        return this.http.get<Category[]>(`${this.API_URL}/_gets`);
     }
 
     findById(id:Number):Observable<Category> {
-        return this.http.get<Category>(`${this.API_URL}/${id}/comics`);
+        return this.http.get<Category>(`${this.API_URL}/${id}`);
     }
 
     addNew(data:Category):Observable<Category> {
@@ -37,10 +37,10 @@ export class CategoryService {
     }
 
     findByWord(word:any): Observable<Category[]> {
-        return this.http.get<Category[]>(`${this.API_URL}/${word}/_parttext`);
+        return this.http.get<Category[]>(`${this.API_URL}/${word}/_gets`);
       }
 
     findByAllWord(word:string): Observable<Category> {
-        return this.http.get<Category>(`${this.API_URL}/${word}/_fulltext`);
+        return this.http.get<Category>(`${this.API_URL}/${word}`);
     } 
 }

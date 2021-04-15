@@ -3,7 +3,7 @@
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
     display: grid;
-    grid-template-columns: 6fr 3fr 6fr;
+    grid-template-columns: 3fr 6fr 6fr;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
@@ -31,4 +31,22 @@ a {
 tbody tr th {
     vertical-align: middle;
 } */
-
+.sort {
+    display: flex;
+    justify-content: flex-end;
+}
+.sort-category {
+    border-radius: 10px;
+    width: 105px;
+    margin-right: 5px;
+}
+.sort-author {
+    border-radius: 10px;
+    width: 100px;
+    margin-right: 5px;
+}
+.sort-views {
+    border-radius: 10px;
+    width: 130px;
+    margin-right: 5px;
+}

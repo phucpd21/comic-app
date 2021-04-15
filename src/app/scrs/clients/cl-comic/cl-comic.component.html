@@ -22,7 +22,7 @@
 
                                         <span class="span-title">Danh mục: </span>
                                         <span class="span-value">
-                                            <a href="javascript:;">{{ comic.category.name }}</a>
+                                            <a href="javascript:;" routerLink="/category/{{ comic.cate_id }}" >{{ comic.category.name }}</a>
                                         </span>
                                         <span class="span-title">Lượt xem: </span>
                                         <span class="span-value">{{ fomatN(comic.views) }}</span>

@@ -3,7 +3,19 @@
         <h5 class="">DANH SÁCH TRUYỆN</h5>
     </div>
     <div class="sort">
-        <!-- Sort -->
+        <select class="form-select sort-category" (change)="sortByCategory($event)">
+            <option value="">Thể loại</option>
+            <option *ngFor="let category of categories" value="{{ category.id }}">{{ category.name }}</option>
+        </select>
+        <select class="form-select sort-author" (change)="sortByAuthor($event)">
+            <option value="">Tác giả</option>
+            <option *ngFor="let author of authors" value="{{ author.id }}">{{ author.name }}</option>
+        </select>
+        <select class="form-select sort-views" (change)="sortByViews($event)">
+            <option value="">Lượt xem</option>
+            <option value="max">Nhiều nhất</option>
+            <option value="min">Ít nhất</option>
+        </select>
     </div>
     <div class="search">
         <input type="text" class="form-control" placeholder="Tìm truyện..." (keyup)="search($event)">
@@ -20,10 +32,10 @@
                 <th scope="col">Ảnh</th>
                 <th scope="col">Thể loại</th>
                 <th scope="col">Tác giả</th>
+                <th scope="col">Lượt xem</th>
                 <th scope="col">Số tập</th>
                 <th scope="col">Trạng thái</th>
                 <!-- <th scope="col">Miêu tả</th> -->
-                <th scope="col">Lượt xem</th>
                 <th class="text-center">Hành động</th>
             </tr>
         </thead>
@@ -39,10 +51,10 @@
                     <!-- {{ comic.author.name }} -->
                     <a href="javascript:;" routerLink="/admin/author-edit/{{ comic.au_id }}"> {{ comic.author.name }}</a>
                 </td>
+                <td>{{ fomatN(comic.views) }}</td>
                 <td>{{ comic.chapters }}</td>
                     <td>{{ comic.status==1 ? 'Hoàn thành' : 'Đang tiến hành' }}</td>
                 <!-- <td>{{ comic.descs }}</td> -->
-                <td>{{ fomatN(comic.views) }}</td>
                 <td class="text-center">
                     <a href="javascript:;" class="btn btn-outline-primary" routerLink="/admin/comic-edit/{{ comic.id }}" >Sửa</a>
                     <span class="mx-1"></span>
