@@ -7,8 +7,15 @@
                 <a href="javascript:;" class="btn-rese" (click)="sortOrder($event)">Đảo chiều</a>
             </div>
             <div class="row px-4">
-                <div *ngFor="let comic of cate.comics" class="col-3 px-2">
+                <div *ngFor="let comic of cate.comics | paginate: { 
+                    itemsPerPage: 12, 
+                    currentPage: page,
+                    totalItems: totalLength
+                }" class="col-3 px-2">
                     <app-cl-item-comic [comic_item]='comic'></app-cl-item-comic>
+                </div>
+                <div class="pagination">
+                    <pagination-controls (pageChange)="page = $event" ></pagination-controls>
                 </div>
             </div>
         </div>

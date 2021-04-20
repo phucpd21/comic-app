@@ -35,7 +35,7 @@ export class AdAuthorNewComponent implements OnInit {
 
     checkAuthor() {
         const wordValue = this.FormAuthor.value.name.trim() ? this.FormAuthor.value.name.trim() : '_';
-        this.authorService.findFullWord(wordValue).subscribe(data => {
+        this.authorService.findname(wordValue).subscribe(data => {
             if (data) this.validAuthor = false;
             else this.validAuthor = true;
         });
@@ -43,9 +43,10 @@ export class AdAuthorNewComponent implements OnInit {
 
     onSubmit() {
         const wordValue = this.FormAuthor.value.name.trim() ? this.FormAuthor.value.name.trim() : '_';
-        this.authorService.findFullWord(wordValue).subscribe(data => {
+        this.authorService.findname(wordValue).subscribe(data => {
             if (data) return;
-            if (this.FormAuthor.valid && this.validAuthor) {
+            if (this.FormAuthor.valid) {
+                this.FormAuthor.value.name = this.FormAuthor.value.name.trim();
                 this.authorService.addNew(this.FormAuthor.value).subscribe(data => {
                     this.router.navigate(['/admin/author-list']);
                 });

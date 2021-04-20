@@ -75,6 +75,8 @@ export class AdComicNewComponent implements OnInit {
             if (data) return;
             if (this.FormComic.valid && this.validName) {
                 this.FormComic.value.image = this.image;
+                this.FormComic.value.name = this.FormComic.value.name.trim();
+                this.FormComic.value.descs = this.FormComic.value.descs.trim();
                 this.comicService.addNew(this.FormComic.value).subscribe(res => {
                     this.router.navigate(['/admin/comic-list']);
                 });

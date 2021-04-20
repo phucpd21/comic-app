@@ -39,3 +39,8 @@
 .category-title {
     font-size: 20px;
 }
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

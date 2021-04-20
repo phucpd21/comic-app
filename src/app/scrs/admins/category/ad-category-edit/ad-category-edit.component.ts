@@ -47,9 +47,10 @@ export class AdCategoryEditComponent implements OnInit {
 
     onSubmit() {
         const wordValue = this.FormCate.value.name.trim() ? this.FormCate.value.name.trim() : '_';
-        this.categoryService.findByAllWord(wordValue).subscribe(data => {
+        this.categoryService.findname(wordValue).subscribe(data => {
             if (data && data.id != this.category.id) return;
             if (this.FormCate.valid) {
+                this.FormCate.value.name = this.FormCate.value.name.trim();
                 this.categoryService.update(this.cateId, this.FormCate.value).subscribe(data => {
                     this.Router.navigate(['/admin/category-list']);
                 });
@@ -59,7 +60,7 @@ export class AdCategoryEditComponent implements OnInit {
 
     checkCate() {
         const wordValue = this.FormCate.value.name.trim() ? this.FormCate.value.name.trim() : '_';
-        this.categoryService.findByAllWord(wordValue).subscribe(data => {
+        this.categoryService.findname(wordValue).subscribe(data => {
             if (data) {
                 if (data.id != this.category.id) this.validCate = false;
                 else this.validCate = true;

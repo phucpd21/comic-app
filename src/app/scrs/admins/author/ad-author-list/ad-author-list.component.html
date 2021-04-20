@@ -4,6 +4,11 @@
     </div>
     <div class="sort">
         <!-- Sort -->
+        <select class="form-select sort-quantity" (change)="sortQuantity($event)">
+            <option value="">Số lượng truyện</option>
+            <option value="desc">Nhiều nhất</option>
+            <option value="asc">Ít nhất</option>
+        </select>
     </div>
     <div class="search">
         <input type="text" class="form-control" placeholder="Tìm tác giả..." (keyup)="search($event)">

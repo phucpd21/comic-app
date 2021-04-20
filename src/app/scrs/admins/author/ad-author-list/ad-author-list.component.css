@@ -13,3 +13,10 @@
 .search input{
     border-radius: 10px;
 }
+
+.sort-quantity {
+    border-radius: 10px;
+}
+.sort {
+    margin-right: 10px;
+}

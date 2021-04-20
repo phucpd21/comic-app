@@ -66,6 +66,8 @@ export class AdComicEditComponent implements OnInit {
             if (data && data.id != this.comic.id) return;
             if (this.FormComic.valid) {
                 this.FormComic.value.image = this.image;
+                this.FormComic.value.name = this.FormComic.value.name.trim();
+                this.FormComic.value.descs = this.FormComic.value.descs.trim();
                 this.comicService.update(this.idComic, this.FormComic.value).subscribe(data => {
                     this.router.navigate(['/admin/comic-list']);
                 });

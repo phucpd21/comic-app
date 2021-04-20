@@ -13,8 +13,8 @@
         </select>
         <select class="form-select sort-views" (change)="sortByViews($event)">
             <option value="">Lượt xem</option>
-            <option value="max">Nhiều nhất</option>
-            <option value="min">Ít nhất</option>
+            <option value="desc">Cao nhất</option>
+            <option value="asc">Nhấp nhất</option>
         </select>
     </div>
     <div class="search">
@@ -40,16 +40,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let comic of comics; index as i">
-                <th scope="row">{{ i+1 }}</th>
+            <tr *ngFor="let comic of comics  | paginate: { 
+                itemsPerPage: 5, 
+                currentPage: page,
+                totalItems: totalLength
+            }; index as i">
+                <th scope="row">{{ (page-1)*5+(i+1) }}</th>
                 <td>{{ comic.name }}</td>
                 <td class="image">
                     <img src="{{ comic.image }}" alt="image">
                 </td>
-                <td><a href="javascript:;" routerLink="/admin/category-edit/{{ comic.cate_id }}">{{ comic.category.name }}</a></td>
                 <td>
-                    <!-- {{ comic.author.name }} -->
-                    <a href="javascript:;" routerLink="/admin/author-edit/{{ comic.au_id }}"> {{ comic.author.name }}</a>
+                    {{ comic.category.name }}
+                    <!-- <a href="javascript:;" routerLink="/admin/category-edit/{{ comic.cate_id }}">{{ comic.category.name }}</a> -->
+                </td>
+                <td>
+                    {{ comic.author.name }}
+                    <!-- <a href="javascript:;" routerLink="/admin/author-edit/{{ comic.au_id }}"> {{ comic.author.name }}</a> -->
                 </td>
                 <td>{{ fomatN(comic.views) }}</td>
                 <td>{{ comic.chapters }}</td>
@@ -63,4 +70,7 @@
             </tr>
         </tbody>
     </table>
+    <div class="pagination">
+        <pagination-controls (pageChange)="page = $event" ></pagination-controls>
+    </div>
 </div>

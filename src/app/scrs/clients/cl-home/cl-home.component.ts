@@ -11,12 +11,16 @@ export class ClHomeComponent implements OnInit {
 
   comics: Comic[] = [];
 
+  totalLength: any;
+  page: number = 1;
+
   constructor(
     private comicService: ComicService,
   ) { }
 
   ngOnInit(): void {
     this.comicService.getsAll().subscribe(data => {
+      this.totalLength = data.length;
       this.comics = data;
     })
   }

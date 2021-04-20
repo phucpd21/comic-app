@@ -36,5 +36,17 @@ export class AdCategoryListComponent implements OnInit {
         })
     }
 
+    sortQuantity(event: any) {
+        let order = event.target.value;
+        if (order == 'desc') {
+            this.categories = this.categories.sort((a,b) => -( Number(a.comics.length) - Number(b.comics.length)));
+        } else if(order == 'asc' ) {
+            this.categories = this.categories.sort((a,b) =>  Number(a.comics.length) - Number(b.comics.length));
+        } else {
+            this.categoryService.getsAll().subscribe(data => {
+                this.categories = data;
+            });
+        }
+    }
 
 }

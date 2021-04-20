@@ -44,7 +44,7 @@ export class AdAuthorEditComponent implements OnInit {
     get f() { return this.FormAuthor.controls }
 
     checkAuthor() {
-        this.authorService.findFullWord(this.FormAuthor.value.name).subscribe(data => {
+        this.authorService.findname(this.FormAuthor.value.name).subscribe(data => {
             if (data) {
                 if (data.id == this.author.id) {
                     this.validAuthor = true;
@@ -56,8 +56,9 @@ export class AdAuthorEditComponent implements OnInit {
     }
 
     onSubmit() {
-        this.authorService.findFullWord(this.FormAuthor.value.name).subscribe(data => {
+        this.authorService.findname(this.FormAuthor.value.name).subscribe(data => {
             if (data  && data.id != this.author.id) return;
+            this.FormAuthor.value.name = this.FormAuthor.value.name.trim();
             this.authorService.update(this.authorId, this.FormAuthor.value).subscribe(res => {
                 this.router.navigate(['/admin/author-list']);
             });

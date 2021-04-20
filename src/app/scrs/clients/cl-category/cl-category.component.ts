@@ -12,6 +12,8 @@ export class ClCategoryComponent implements OnInit {
 
   cate:Category = new Category(0,'',[]); 
   cateId!: Number;
+  totalLength: any;
+  page: number = 1;
 
   constructor(
     private ComicCategoryServices: CategoryService,
@@ -24,8 +26,8 @@ export class ClCategoryComponent implements OnInit {
       if(params.id) {
         this.cateId = params.id;
         this.ComicCategoryServices.findById(this.cateId).subscribe(data => {
+          this.totalLength = data.comics.length;
           this.cate = data;
-          // console.log(this.cate);
         });
       }
     })

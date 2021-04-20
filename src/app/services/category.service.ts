@@ -15,12 +15,12 @@ export class CategoryService {
         return this.http.get<Category[]>(this.API_URL);
     }
 
-    getsAll():Observable<Category[]> {
-        return this.http.get<Category[]>(`${this.API_URL}/_gets`);
+    getsAll(sort:string = 'id', order:string = 'desc'):Observable<Category[]> {
+        return this.http.get<Category[]>(`${this.API_URL}?_embed=comics&_sort=${sort}&_order=${order}`);
     }
 
     findById(id:Number):Observable<Category> {
-        return this.http.get<Category>(`${this.API_URL}/${id}`);
+        return this.http.get<Category>(`${this.API_URL}/${id}?_embed=comics`);
     }
 
     addNew(data:Category):Observable<Category> {
@@ -37,10 +37,10 @@ export class CategoryService {
     }
 
     findByWord(word:any): Observable<Category[]> {
-        return this.http.get<Category[]>(`${this.API_URL}/${word}/_gets`);
+        return this.http.get<Category[]>(`${this.API_URL}/search?_word=${word}`);
       }
 
-    findByAllWord(word:string): Observable<Category> {
-        return this.http.get<Category>(`${this.API_URL}/${word}`);
+    findname(word:string): Observable<Category> {
+        return this.http.get<Category>(`${this.API_URL}/findbyname?_word=${word}`);
     } 
 }

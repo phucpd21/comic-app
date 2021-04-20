@@ -17,7 +17,7 @@ export class AuthorService {
   }
 
   getsAll():Observable<Author[]> {
-    return this.http.get<Author[]>(`${this.API_URL}/_gets`);
+    return this.http.get<Author[]>(`${this.API_URL}?_embed=comics&_sort=id&_order=desc`);
   }
 
   findById(id:Number):Observable<Author> {
@@ -37,11 +37,11 @@ export class AuthorService {
   }
 
   findByWord(word:string):Observable<Author[]> {
-    return this.http.get<Author[]>(`${this.API_URL}/${word}/_gets`);
+    return this.http.get<Author[]>(`${this.API_URL}/search?_word=${word}`);
   }
 
-  findFullWord(word:string):Observable<Author> {
-    return this.http.get<Author>(`${this.API_URL}/${word}`);
+  findname(word:string):Observable<Author> {
+    return this.http.get<Author>(`${this.API_URL}/findbyname?_word=${word}`);
   }
 
 }

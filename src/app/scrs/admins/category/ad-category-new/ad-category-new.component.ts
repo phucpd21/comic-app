@@ -33,7 +33,7 @@ export class AdCategoryNewComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.categoryService.getAll().subscribe(data => {
+        this.categoryService.getsAll().subscribe(data => {
             this.categories = data;
             console.log(this.categories);
         });
@@ -41,9 +41,10 @@ export class AdCategoryNewComponent implements OnInit {
 
     onSubmit() {
         let word = (this.FormCate.value.name).trim() ? (this.FormCate.value.name).trim() : '_';
-        this.categoryService.findByAllWord(word).subscribe(data => {
+        this.categoryService.findname(word).subscribe(data => {
             if(data) return;
             if(this.FormCate.valid) {
+                this.FormCate.value.name = this.FormCate.value.name.trim();
                 this.categoryService.addNew(this.FormCate.value).subscribe(data => {
                     this.router.navigate(['/admin/category-list']);
                 });
@@ -53,7 +54,7 @@ export class AdCategoryNewComponent implements OnInit {
 
     checkCate() {
         const wordValue = this.FormCate.value.name.trim() ? this.FormCate.value.name.trim() : '_';
-        this.categoryService.findByAllWord(wordValue).subscribe(data => {
+        this.categoryService.findname(wordValue).subscribe(data => {
             if (data) {
                 this.validCate = false;
             } else {

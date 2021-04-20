@@ -50,3 +50,8 @@ tbody tr th {
     width: 130px;
     margin-right: 5px;
 }
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

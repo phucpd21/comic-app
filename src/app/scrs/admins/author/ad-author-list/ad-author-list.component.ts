@@ -35,4 +35,17 @@ export class AdAuthorListComponent implements OnInit {
         })
     }
 
+    sortQuantity(event: any) {
+        let order = event.target.value;
+        if (order == 'desc') {
+            this.authors = this.authors.sort((a,b) => -(Number(a.comics.length) - Number(b.comics.length)));
+        } else if(order == 'asc' ) {
+            this.authors = this.authors.sort((a,b) =>  Number(a.comics.length) - Number(b.comics.length));
+        }  else {
+            this.authorService.getsAll().subscribe(data => {
+                this.authors = data;
+            });
+        }
+    }
+
 }

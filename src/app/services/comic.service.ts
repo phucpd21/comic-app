@@ -17,26 +17,26 @@ export class ComicService {
 	}
 
 	getsAll(): Observable<Comic[]> {
-		return this.http.get<Comic[]>(`${this.API_URL}/_gets`);
+		return this.http.get<Comic[]>(`${this.API_URL}?_expand=category+author&_sort=id&_order=desc`);
 	}
 
-	getsAllbyTable(cate_id: Number = 0, au_id: Number = 0, views_status:string = ''): Observable<Comic[]> {
+	// getsAllbyTable(cate_id: Number = 0, au_id: Number = 0, views_status:string = ''): Observable<Comic[]> {
 
-		if (cate_id && au_id) {
-			return this.http.get<Comic[]>(`${this.API_URL}/_gets?cate_id=${cate_id}&au_id=${au_id}&views_status=${views_status}`);
-		} else if (cate_id) {
-			return this.http.get<Comic[]>(`${this.API_URL}/_gets?cate_id=${cate_id}&views_status=${views_status}`);
-		} else if (au_id) {
-			return this.http.get<Comic[]>(`${this.API_URL}/_gets?au_id=${au_id}&views_status=${views_status}`);
-		} else {
-			return this.http.get<Comic[]>(`${this.API_URL}/_gets?views_status=${views_status}`);
-		}
+	// 	if (cate_id && au_id) {
+	// 		return this.http.get<Comic[]>(`${this.API_URL}?cate_id=${cate_id}&au_id=${au_id}&views_status=${views_status}`);
+	// 	} else if (cate_id) {
+	// 		return this.http.get<Comic[]>(`${this.API_URL}?cate_id=${cate_id}&views_status=${views_status}`);
+	// 	} else if (au_id) {
+	// 		return this.http.get<Comic[]>(`${this.API_URL}?au_id=${au_id}&views_status=${views_status}`);
+	// 	} else {
+	// 		return this.http.get<Comic[]>(`${this.API_URL}?views_status=${views_status}`);
+	// 	}
 
 
-	}
+	// }
 
 	findById(id: Number): Observable<Comic> {
-		return this.http.get<Comic>(`${this.API_URL}/${id}`);
+		return this.http.get<Comic>(`${this.API_URL}/${id}?_expand=category+author`);
 	}
 
 	addNew(data: any): Observable<any> {
@@ -51,22 +51,12 @@ export class ComicService {
 		return this.http.delete<Comic>(`${this.API_URL}/${id}`);
 	}
 
-	findByWord(word: any, cate_id:Number = 0, au_id:Number = 0, views_status:string = ''): Observable<Comic[]> {
-		// return this.http.get<Comic[]>(`${this.API_URL}/${word}/_gets`);
-
-		if (cate_id && au_id) {
-			return this.http.get<Comic[]>(`${this.API_URL}/${word}/_gets?cate_id=${cate_id}&au_id=${au_id}&views_status=${views_status}`);
-		} else if (cate_id) {
-			return this.http.get<Comic[]>(`${this.API_URL}/${word}/_gets?cate_id=${cate_id}&views_status=${views_status}`);
-		} else if (au_id) {
-			return this.http.get<Comic[]>(`${this.API_URL}/${word}/_gets?au_id=${au_id}&views_status=${views_status}`);
-		} else {
-			return this.http.get<Comic[]>(`${this.API_URL}/${word}/_gets?views_status=${views_status}`);
-		}
+	search(word: any, cate_id:Number = 0, au_id:Number = 0,order:string = '', sort:string = 'views'): Observable<Comic[]> {
+		return this.http.get<Comic[]>(`${this.API_URL}/search?_word=${word}&_category=${cate_id}&_author=${au_id}&_sort=${sort}&_order=${order}`);
 	}
 
 	findFullWord(word: any): Observable<Comic> {
-		return this.http.get<Comic>(`${this.API_URL}/${word}`);
+		return this.http.get<Comic>(`${this.API_URL}/findbyname?_word=${word}`);
 	}
 
 	uploadFile(data: any): Observable<any> {

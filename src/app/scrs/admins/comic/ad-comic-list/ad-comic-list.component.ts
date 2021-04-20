@@ -20,8 +20,10 @@ export class AdComicListComponent implements OnInit {
     cate_id: Number = 0;
     au_id: Number = 0;
     wordsearch: string = '';
-    views_status: string = '';
+    orderby: string = '';
     
+    totalLength: any;
+    page: number = 1;
 
     
     constructor(
@@ -32,10 +34,11 @@ export class AdComicListComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.comicService.getsAllbyTable(this.cate_id, this.au_id).subscribe(data => {
+        this.comicService.getsAll().subscribe(data => {
             this.comics = data;
+            this.totalLength = data.length;
         });
-        this.authorService.getAll().subscribe(data => {
+        this.authorService.getsAll().subscribe(data => {
             this.authors = data;
         });
         this.categoryService.getAll().subscribe(data => {
@@ -47,7 +50,7 @@ export class AdComicListComponent implements OnInit {
     onRemove(id: Number) {
         if (confirm('Xóa ngay')) {
             this.comicService.delete(id).subscribe(data => {
-                this.comicService.getsAllbyTable(this.cate_id, this.au_id).subscribe(data => {
+                this.comicService.getsAll().subscribe(data => {
                     this.comics = data;
                 });
             });
@@ -57,9 +60,8 @@ export class AdComicListComponent implements OnInit {
     search(event: any) {
         let word = event.target.value.trim() ? event.target.value : '';
         this.wordsearch = word;
-        console.log('word: ', this.wordsearch,'cate_id: ', this.cate_id, 'au_id: ', this.au_id, 'view_status: ', this.views_status );
-        console.log('_______________________________________________');
-        this.comicService.findByWord(word, this.cate_id, this.au_id, this.views_status).subscribe(data => {
+        
+        this.comicService.search(word, this.cate_id, this.au_id, this.orderby).subscribe(data => {
             this.comics = data;
         });
     }
@@ -77,17 +79,17 @@ export class AdComicListComponent implements OnInit {
         
         if(cateId) {
             this.cate_id = cateId;
-            this.comicService.findByWord(this.wordsearch, cateId, this.au_id, this.views_status).subscribe(data => {
+            this.comicService.search(this.wordsearch, cateId, this.au_id, this.orderby).subscribe(data => {
                 this.comics = data;
             });
         } else {
             this.cate_id = 0;
-            this.comicService.findByWord(this.wordsearch, cateId, this.au_id, this.views_status).subscribe(data => {
+            this.comicService.search(this.wordsearch, cateId, this.au_id, this.orderby).subscribe(data => {
                 this.comics = data;
             });
         }
 
-        console.log('word: ', this.wordsearch,'cate_id: ', this.cate_id, 'au_id: ', this.au_id, 'view_status: ', this.views_status );
+        console.log('word: ', this.wordsearch,'cate_id: ', this.cate_id, 'au_id: ', this.au_id, 'view_status: ', this.orderby );
         console.log('_______________________________________________');
         
     }
@@ -96,16 +98,16 @@ export class AdComicListComponent implements OnInit {
 
         if(authorId) {
             this.au_id = authorId;
-            this.comicService.findByWord(this.wordsearch, this.cate_id, authorId, this.views_status).subscribe(data => {
+            this.comicService.search(this.wordsearch, this.cate_id, authorId, this.orderby).subscribe(data => {
                 this.comics = data;
             });
         } else {
             this.au_id = 0;
-            this.comicService.findByWord(this.wordsearch, this.cate_id, authorId, this.views_status).subscribe(data => {
+            this.comicService.search(this.wordsearch, this.cate_id, authorId, this.orderby).subscribe(data => {
                 this.comics = data;
             });
         }
-        console.log('word: ', this.wordsearch,'cate_id: ', this.cate_id, 'au_id: ', this.au_id, 'view_status: ', this.views_status );
+        console.log('word: ', this.wordsearch,'cate_id: ', this.cate_id, 'au_id: ', this.au_id, 'view_status: ', this.orderby );
         console.log('_______________________________________________');
     }
 
@@ -113,21 +115,17 @@ export class AdComicListComponent implements OnInit {
         let views = event.target.value;
 
         if(views) {
-            this.views_status = views;
+            this.orderby = views;
         } else {
-            this.views_status = '';
+            this.orderby = '';
         }
         
-        this.comicService.findByWord(this.wordsearch, this.cate_id, this.au_id, views).subscribe(data => {
+        this.comicService.search(this.wordsearch, this.cate_id, this.au_id, views).subscribe(data => {
             this.comics = data;
         });
 
-        console.log('word: ', this.wordsearch,'cate_id: ', this.cate_id, 'au_id: ', this.au_id, 'view_status: ', this.views_status );
+        console.log('word: ', this.wordsearch,'cate_id: ', this.cate_id, 'au_id: ', this.au_id, 'view_status: ', this.orderby );
         console.log('_______________________________________________');
-    }
-
-    setValueInputSeacrch(event:any) {
-
     }
 
 }

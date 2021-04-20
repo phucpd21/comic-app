@@ -37,12 +37,12 @@ export class ClHeaderComponent implements OnInit {
 
     search(event: any) {
         let word = event.target.value.trim() ? event.target.value.trim() : 'errors_not_found';
-        this.comicService.findByWord(word).subscribe(data => {
+        this.comicService.search(word).subscribe(data => {
             if (data) {
                 data = data.slice(0, 10);
                 this.comics = data;
             } else {
-                this.comics = data;
+                this.comics = [];
             }
         });
     }
@@ -53,16 +53,16 @@ export class ClHeaderComponent implements OnInit {
 
     changeClass() {
         document.querySelector('.list-result-comic')?.classList.add('hide');
-        setTimeout(() => {
-            document.querySelector('.list-result-comic')?.classList.remove('hide');
-        }, 100);
     }
-
-    // focusIn() {
-    //     document.querySelector('.list-result-comic')?.classList.add('show');
-    // }
-    // focusOut() {
-    //     document.querySelector('.list-result-comic')?.classList.remove('show');
-    // }
+    onFocusout() {
+        setTimeout(() => {
+            this.comics = [];
+            document.querySelector('.list-result-comic')?.classList.add('hide');
+        }, 300);
+    }
+    onFocus() {
+        document.querySelector('.list_dropdown_categories')?.classList.remove('hide');
+    }
+    
 
 }
